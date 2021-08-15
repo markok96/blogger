@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem "paperclip", "~> 6.0.0"
 gem 'sorcery' 
-
+gem 'rexml', '~> 3.2', '>= 3.2.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
