@@ -1,5 +1,9 @@
 
-<h1><%= @article.title %> by <%= @article.author.username %></h1>
+<h1 class="title"><%= @article.title %></h1>
+  <%= link_to @article.status, archive_article_path, class: "archive-btn", method: :patch %>
+<p>
+  Author: 
+  <%= @article.author.username %></p>
 <p>
   Tags:
   <% @article.tags.each do |tag| %>

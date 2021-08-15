@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
 		@article.author = current_user
 		@article.save
 
-		ArticleMailer.new_article(@article).deliver_now
+		ArticleMailer.new_article(@article).deliver_later
 
 		flash.notice = "Article #{@article.title} Created!"
 		redirect_to article_path(@article)
@@ -49,5 +49,17 @@ class ArticlesController < ApplicationController
 		flash.notice = "Article #{@article.title} Updated!"
 
 		redirect_to article_path(@article)
-	end	
+	end
+
+	def archive
+		@article = Article.find(params[:id])
+		if @article.status == "draft"
+			@article.update(status: "archived")
+			ArchiveMailer.article_archived(@article).deliver_later
+		elsif @article.status == "archived"
+			@article.update(status: "draft")
+		end
+
+		redirect_to @article, notice: "Status changed to #{@article.status}"
+	end
 end
